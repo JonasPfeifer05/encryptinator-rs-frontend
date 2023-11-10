@@ -3,9 +3,10 @@
 </script>
 
 <template>
-  <h1>login</h1>
+  <div class="w-100 h-100">
+
+  </div>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
 </style>

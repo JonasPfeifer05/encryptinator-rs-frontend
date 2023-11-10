@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <h1>register</h1>
+  <div class="w-100 h-100">
+
+  </div>
 </template>
 
 <style scoped>
