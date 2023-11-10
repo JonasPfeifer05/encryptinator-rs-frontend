@@ -4,8 +4,10 @@ import ThemeForm from "../components/ThemeForm.vue";
 import {computed, type Ref, ref} from "vue";
 import {isValidEmail} from "../util/validation.ts";
 import {useUser} from "../stores/userStore.ts";
+import {useRouter} from "vue-router";
 
 const userStore = useUser();
+const router = useRouter();
 
 let emailError: Ref<"noError" | "noEmail" | "invalid" | "alreadyInUse"> = ref("noEmail");
 let passwordError: Ref<"noError" | "noPassword"> = ref("noPassword");
