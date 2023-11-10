@@ -3,6 +3,11 @@
 import ThemeForm from "../components/ThemeForm.vue";
 import {computed, type Ref, ref} from "vue";
 import {isValidEmail} from "../util/validation.ts";
+import {useUser} from "../stores/userStore.ts";
+import {useRouter} from "vue-router";
+
+const userStore = useUser();
+const router = useRouter();
 
 let emailError: Ref<"noError" | "noEmail" | "invalid" | "alreadyInUse"> = ref("noEmail");
 let passwordError: Ref<"noError" | "noPassword"> = ref("noPassword");
@@ -10,9 +15,15 @@ let passwordError: Ref<"noError" | "noPassword"> = ref("noPassword");
 const email = ref("");
 const password = ref("");
 
-function login() {
+async function login() {
   if (emailError.value !== "noError" || passwordError.value !== "noError") return;
-  // TODO Add login logic
+  const result = await userStore.loginUser(email.value, password.value);
+  if (result.isOk()) {
+    console.log("Logged in");
+    await router.push("/home/dashboard")
+  } else {
+    console.log("ERROR: " + result.getErr());
+  }
 }
 
 const displayValidEmail = computed(() => {

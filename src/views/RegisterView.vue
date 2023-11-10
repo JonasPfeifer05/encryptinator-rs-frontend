@@ -3,6 +3,9 @@
 import ThemeForm from "../components/ThemeForm.vue";
 import {computed, type Ref, ref} from "vue";
 import {isValidEmail} from "../util/validation.ts";
+import {useUser} from "../stores/userStore.ts";
+
+const userStore = useUser();
 
 let emailError: Ref<"noError" | "noEmail" | "invalid" | "alreadyInUse"> = ref("noEmail");
 let passwordError: Ref<"noError" | "noPassword"> = ref("noPassword");
@@ -10,9 +13,15 @@ let passwordError: Ref<"noError" | "noPassword"> = ref("noPassword");
 const email = ref("");
 const password = ref("");
 
-function register() {
+async function register() {
   if (emailError.value !== "noError" || passwordError.value !== "noError") return;
-  // TODO Add register logic
+  const result = await userStore.registerUser(email.value, password.value);
+  if (result.isOk()) {
+    console.log("Registered");
+    await router.push("/home/dashboard")
+  } else {
+    console.log("ERROR: " + result.getErr());
+  }
 }
 
 const displayValidEmail = computed(() => {
