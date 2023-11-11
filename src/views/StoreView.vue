@@ -51,8 +51,7 @@ import {useUser} from "../stores/userStore.ts";
 </script>
 
 <template>
-  <ThemeForm title="Store data"
-             button-text="Store"
+  <ThemeForm button-text="Store"
              width="100%"
              height="100%"
              :footer="false"

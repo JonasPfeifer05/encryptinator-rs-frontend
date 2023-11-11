@@ -4,7 +4,7 @@ const emit = defineEmits<{
 }>();
 
 interface Props {
-  title: string
+  title?: string
   buttonText: string
   width: string,
   height: string,

@@ -53,7 +53,7 @@ function updatePasswordError() {
   <ThemeForm class="position-absolute rounded-3 top-50 start-50 translate-middle"
              title="Register"
              width="400px"
-             height="450px"
+             height="400px"
              button-text="Register"
              @pressed="register" footer header>
     <template #content>

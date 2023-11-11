@@ -43,7 +43,6 @@ function logout() {
 #content {
   top: 100px;
   width: 80%;
-  height: 550px;
 }
 
 #header {
