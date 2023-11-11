@@ -70,7 +70,6 @@ function updatePasswordError() {
           <div v-if="emailError==='invalid'" class="invalid-feedback">Invalid formatted email!</div>
           <div v-if="emailError==='alreadyInUse'" class="invalid-feedback">Email is already in use!</div>
           <div class="valid-feedback">Looks good!</div>
-          <small class="form-text">This email must be verify!</small>
         </div>
 
         <div class="w-75">
