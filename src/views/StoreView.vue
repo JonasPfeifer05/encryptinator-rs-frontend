@@ -62,7 +62,7 @@ async function store() {
   const password = prompt("Please your master password to encrypt the file:");
   if (!password) return;
 
-  const encrypted = invoke("encrypt", {
+  const encrypted = await invoke("encrypt", {
     data,
     password
   });
@@ -70,6 +70,14 @@ async function store() {
   const store = new Store(".local.dat");
   await store.set(name.value, encrypted);
   alert("Data was stored!")
+
+  const dataEncrypted = (await store.get(name.value)) as string;
+  console.log(dataEncrypted)
+  const decrypted = await invoke("decrypt", {
+    data: dataEncrypted,
+    password
+  });
+  console.log(decrypted);
 }
 
 import ThemeForm from "../components/ThemeForm.vue";
