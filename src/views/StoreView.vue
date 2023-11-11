@@ -46,29 +46,30 @@ function setFile(event: Event) {
   file.value = (event.target as HTMLInputElement).files!.item(0);
 }
 
-function store() {
+async function store() {
   if (nameError.value !== "noError") return;
 
+  let data;
   if (storeVariant.value === "text") {
     if (textError.value !== "noError") return;
-
-    let password = prompt("Please your master password to encrypt the file:");
-    if (!password) return;
-
-    invoke("encrypt", {
-      data: "",
-      password
-    }).then(encrypted => {
-      const store = new Store(".local.dat");
-      store.set(name.value, encrypted);
-      alert("Data was stored!")
-    })
+    data = text.value;
   } else {
     if (fileError.value !== "noError") return;
 
-    let password = prompt("Please your master password to encrypt the file:");
-    if (!password) return;
+    data = await file.value!.text();
   }
+
+  const password = prompt("Please your master password to encrypt the file:");
+  if (!password) return;
+
+  const encrypted = invoke("encrypt", {
+    data,
+    password
+  });
+
+  const store = new Store(".local.dat");
+  await store.set(name.value, encrypted);
+  alert("Data was stored!")
 }
 
 import ThemeForm from "../components/ThemeForm.vue";
