@@ -6,22 +6,21 @@ const route = useRoute();
 
 <template>
   <nav id="navbar" class="d-flex justify-content-center align-items-center p-3 gap-5">
-    <button class="btn btn-success">
-      <router-link
-          to="/home/store"
-          class="text-reset"
-          :class="{'text-decoration-none': route.name !== 'home.store'}"
-      >Store data
-      </router-link>
-    </button>
-    <button class="btn btn-success">
-      <router-link
-          to="/home/retrieve"
-          class="text-reset"
-          :class="{'text-decoration-none': route.name !== 'home.retrieve'}">
+    <router-link
+        to="/home/store"
+        class="text-reset"
+    >
+      <button class="btn btn-success" :class="{'text-decoration-underline': route.name === 'home.store'}">
+        Store data
+      </button>
+    </router-link>
+    <router-link
+        to="/home/retrieve"
+        class="text-reset">
+      <button class="btn btn-success" :class="{'text-decoration-underline': route.name === 'home.retrieve'}">
         Retrieve data
-      </router-link>
-    </button>
+      </button>
+    </router-link>
   </nav>
   <router-view/>
 </template>
