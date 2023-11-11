@@ -50,12 +50,12 @@ function updatePasswordError() {
 </script>
 
 <template>
-  <ThemeForm class="position-absolute top-50 start-50 translate-middle"
+  <ThemeForm class="position-absolute rounded-3 top-50 start-50 translate-middle"
              title="Login"
-             :width="400"
-             :height="450"
+             width="400px"
+             height="400px"
              button-text="Login"
-             @pressed="login" footer>
+             @pressed="login" footer header>
     <template #content>
       <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
         <div class="w-75 mb-3">

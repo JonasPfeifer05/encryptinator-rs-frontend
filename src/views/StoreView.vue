@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {computed, Ref, ref} from "vue";
 
+const userStore = useUser();
+
 const name = ref("");
 const nameError: Ref<"noError" | "noName"> = ref("noName");
 const storeVariant: Ref<"text" | "file"> = ref("text");
@@ -45,15 +47,17 @@ function setFile(event: Event) {
 }
 
 import ThemeForm from "../components/ThemeForm.vue";
+import {useUser} from "../stores/userStore.ts";
 </script>
 
 <template>
   <ThemeForm title="Store data"
              button-text="Store"
-             :width="800"
-             :height="600"
+             width="100%"
+             height="100%"
              :footer="false"
-             class="position-absolute top-50 start-50 translate-middle">
+             :header="false"
+             class="rounded-bottom-3">
     <template #content>
       <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
         <div id="nameContainer" class="w-100 d-flex align-items-center">
@@ -72,8 +76,8 @@ import ThemeForm from "../components/ThemeForm.vue";
         <div id="variantContainer" class="w-100 d-flex flex-column justify-content-center">
           <label for="variantInput" class="form-label">Select what to store</label>
           <select id="variantInput" class="form-select" v-model="storeVariant">
-            <option value="text" selected>text</option>
-            <option value="file">file</option>
+            <option value="text" selected>Text</option>
+            <option value="file">File</option>
           </select>
         </div>
         <div id="uploadContainer" class="w-100 d-flex flex-column justify-content-center">
@@ -99,8 +103,8 @@ import ThemeForm from "../components/ThemeForm.vue";
         <div id="optionContainer" class="w-100 d-flex flex-column justify-content-center">
           <label for="optionInput" class="form-label">Select where to store</label>
           <select id="optionInput" class="form-select" v-model="storeOption">
-            <option value="local" selected>locally</option>
-            <option value="online">online</option>
+            <option value="local" selected>Locally</option>
+            <option value="online" :disabled="!userStore.isLoggedIn">Online</option>
           </select>
         </div>
       </div>

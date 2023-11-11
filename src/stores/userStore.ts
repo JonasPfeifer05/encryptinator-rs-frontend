@@ -31,11 +31,15 @@ export const useUser = defineStore('customers', {
 
             this.token = tokenResult.getOK();
             return okResult(null);
+        },
+
+        logout() {
+            this.token = undefined;
         }
     },
     getters: {
         isLoggedIn(state): boolean {
-            return state.token !== null;
+            return state.token !== undefined;
         },
         getToken(state): string|undefined {
             return state.token;

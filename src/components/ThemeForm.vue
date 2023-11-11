@@ -6,8 +6,9 @@ const emit = defineEmits<{
 interface Props {
   title: string
   buttonText: string
-  width: number,
-  height: number,
+  width: string,
+  height: string,
+  header: boolean,
   footer: boolean,
 }
 
@@ -15,13 +16,13 @@ const props = defineProps<Props>();
 </script>
 
 <template>
-  <form id="form" :style="{width: props.width+'px',height: props.height+'px'}"
-        class="px-3 rounded-3 d-flex flex-column align-items-center blurred-bg" @submit.prevent="emit('pressed')">
-    <div id="titleContainer" class="d-flex align-items-center">
+  <form id="form" :style="{width: props.width,height: props.height}"
+        class="px-3 d-flex flex-column align-items-center blurred-bg" @submit.prevent="emit('pressed')">
+    <div v-if="props.header" id="titleContainer" class="d-flex align-items-center">
       <h2 id="title">{{ props.title }}</h2>
     </div>
 
-    <div id="content" :style="{height: (props.height - 75 - 60 - (props.footer ? 50 : 0))+'px'}" class="w-100">
+    <div id="content" :style="{height: 'calc('+props.height+' - ' + ((props.header ? 75 : 0 - 60) - (props.footer ? 50 : 0)) + 'px'}" class="w-100">
       <slot name="content"></slot>
     </div>
 
