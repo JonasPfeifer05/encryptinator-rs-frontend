@@ -46,8 +46,35 @@ function setFile(event: Event) {
   file.value = (event.target as HTMLInputElement).files!.item(0);
 }
 
+function store() {
+  if (nameError.value !== "noError") return;
+
+  if (storeVariant.value === "text") {
+    if (textError.value !== "noError") return;
+
+    let password = prompt("Please your master password to encrypt the file:");
+    if (!password) return;
+
+    invoke("encrypt", {
+      data: "",
+      password
+    }).then(encrypted => {
+      const store = new Store(".local.dat");
+      store.set(name.value, encrypted);
+      alert("Data was stored!")
+    })
+  } else {
+    if (fileError.value !== "noError") return;
+
+    let password = prompt("Please your master password to encrypt the file:");
+    if (!password) return;
+  }
+}
+
 import ThemeForm from "../components/ThemeForm.vue";
 import {useUser} from "../stores/userStore.ts";
+import {invoke} from "@tauri-apps/api";
+import {Store} from "tauri-plugin-store-api";
 </script>
 
 <template>
@@ -56,7 +83,8 @@ import {useUser} from "../stores/userStore.ts";
              height="100%"
              :footer="false"
              :header="false"
-             class="rounded-bottom-3">
+             class="rounded-bottom-3"
+             @pressed="store">
     <template #content>
       <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
         <div id="nameContainer" class="w-100 d-flex align-items-center">
@@ -94,7 +122,7 @@ import {useUser} from "../stores/userStore.ts";
                    type="file"
                    id="fileInput"
                    class="form-control"
-                   :class="{'is-valid': displayFileValid, 'is-invalid': !displayFileValid}" >
+                   :class="{'is-valid': displayFileValid, 'is-invalid': !displayFileValid}">
             <div v-if="fileError==='noFile'" class="invalid-feedback">No file provided!</div>
             <div class="valid-feedback">Looks good!</div>
           </template>

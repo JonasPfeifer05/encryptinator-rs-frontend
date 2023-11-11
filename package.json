@@ -21,6 +21,7 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
     "sha512-crypt-ts": "^0.1.27",
+    "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store",
     "vue": "^3.3.4",
     "vue-router": "^4.0.13"
   },

@@ -6,11 +6,11 @@ import {useUser} from "../stores/userStore.ts";
 const userStore = useUser();
 
 const storeOption: Ref<"online" | "local"> = ref("local");
-const name = ref("")
+const name = ref("");
 </script>
 
 <template>
-  <theme-form button-text="Load" :footer="false" :header="false" width="100%" height="100%">
+  <theme-form button-text="Load" class="rounded-bottom-3" :footer="false" :header="false" width="100%" height="100%">
     <template #content>
       <div class="w-100 h-100 d-flex flex-column align-items-center">
         <div id="optionContainer" class="w-100 d-flex flex-column justify-content-center">
