@@ -25,7 +25,7 @@ onMounted(() => {
   (document.getElementById("input") as HTMLInputElement).select();
 })
 
-function submit(e: Event) {
+function submit() {
   if (data.value.length === 0) return;
   emit('submit', data.value)
 }

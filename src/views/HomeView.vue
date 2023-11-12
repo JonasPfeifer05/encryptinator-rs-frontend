@@ -31,6 +31,11 @@ function logout() {
                      :class="{'grayed': route.name !== 'home.retrieve'}">Load
         </router-link>
       </div>
+      <div class="flex-grow-1 d-flex justify-content-center align-items-center border-start">
+        <router-link to="/home/manage" class="text-reset text-decoration-none h2"
+                     :class="{'grayed': route.name !== 'home.manage'}">Manage
+        </router-link>
+      </div>
     </div>
     <div id="body">
       <router-view/>

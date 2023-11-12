@@ -5,6 +5,7 @@ import RegisterView from "../views/RegisterView.vue";
 import HomeView from "../views/HomeView.vue";
 import RetrieveView from "../views/RetrieveView.vue";
 import StoreView from "../views/StoreView.vue";
+import ManageView from "../views/ManageView.vue";
 
 export default createRouter({
     history: createWebHistory(),
@@ -40,7 +41,12 @@ export default createRouter({
                     path: "store",
                     name: "home.store",
                     component: StoreView,
-                }
+                },
+                {
+                    path: "manage",
+                    name: "home.manage",
+                    component: ManageView,
+                },
             ]
         },
         {

@@ -702,6 +702,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "encryptinator"
+version = "0.0.0"
+dependencies = [
+ "magic-crypt",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-store",
+]
+
+[[package]]
 name = "equivalent"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -792,18 +804,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a62bc1cf6f830c2ec14a513a9fb124d0a213a629668a4186f329db21fe045652"
 dependencies = [
  "percent-encoding",
-]
-
-[[package]]
-name = "frontend"
-version = "0.0.0"
-dependencies = [
- "magic-crypt",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-store",
 ]
 
 [[package]]

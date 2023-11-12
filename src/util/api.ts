@@ -8,12 +8,12 @@ export function hashWithAPISalt(data: string): string {
     return sha512.crypt(data, API_SALT);
 }
 
-export async function tryRegister(email: string, passwordHash: string): Promise<Result<string, RegisterError>> {
+export async function tryRegister(_email: string, _passwordHash: string): Promise<Result<string, RegisterError>> {
     // TODO request from backend with axios
     return okResult("TOKEN");
 }
 
-export async function tryLogin(email: string, passwordHash: string): Promise<Result<string, LoginError>> {
+export async function tryLogin(_email: string, _passwordHash: string): Promise<Result<string, LoginError>> {
     // TODO request from backend with axios
     return okResult("TOKEN");
 }

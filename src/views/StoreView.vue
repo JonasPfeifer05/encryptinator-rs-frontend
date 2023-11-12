@@ -3,7 +3,6 @@ import ThemeForm from "../components/ThemeForm.vue";
 import {useUser} from "../stores/userStore.ts";
 import {invoke} from "@tauri-apps/api";
 import {Store} from "tauri-plugin-store-api";
-import NotifyModal from "../components/NotificationModal.vue";
 import {useModal} from "../stores/modalStore.ts";
 
 import {computed, Ref, ref} from "vue";
@@ -67,6 +66,13 @@ async function store() {
     data = await file.value!.text();
   }
 
+  const store = new Store(".local.dat");
+  if (await store.has(name.value)) {
+    modalStore.configureNotification("Name is already in use!");
+    modalStore.showNotification();
+    return;
+  }
+
   modalStore.configurePrompt("Enter master password to encrypt", true, submitData => {
     modalStore.hidePrompt();
     storeEncrypted(data, submitData, name.value);
@@ -89,8 +95,15 @@ async function storeEncrypted(data: string, password: string, name: string) {
     value: encrypted
   });
 
+  resetValues();
   modalStore.configureNotification("Data was stored");
   modalStore.showNotification();
+}
+
+function resetValues() {
+  name.value = "";
+  text.value = "";
+  file.value = null;
 }
 </script>
 
