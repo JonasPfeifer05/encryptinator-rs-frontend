@@ -17,7 +17,7 @@ const props = defineProps<Props>();
 
 <template>
   <form id="form" :style="{width: props.width,height: props.height}"
-        class="px-3 d-flex flex-column align-items-center blurred-bg" @submit.prevent="emit('pressed')">
+        class="px-3 d-flex flex-column align-items-center light-dark-bg border border-2 light-dark-border" @submit.prevent="emit('pressed')">
     <div v-if="props.header" id="titleContainer" class="d-flex align-items-center">
       <h2 id="title">{{ props.title }}</h2>
     </div>
@@ -38,6 +38,7 @@ const props = defineProps<Props>();
 <style scoped lang="scss">
 #form {
   box-sizing: border-box;
+  border-collapse: collapse;
 
   #titleContainer {
     height: 75px;

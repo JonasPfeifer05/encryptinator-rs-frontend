@@ -10,9 +10,10 @@ body {
   overflow: hidden;
 }
 
-.blurred-bg {
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.light-dark-bg {
+  background-color: lighten($dark, 6.5%);
+}
 
+.light-dark-border {
+  border-color: lighten($dark, 10%) !important;
 }

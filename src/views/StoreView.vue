@@ -12,6 +12,12 @@ const textError: Ref<"noError" | "noText"> = ref("noText");
 const file: Ref<File | null> = ref(null);
 const fileError: Ref<"noError" | "noFile"> = ref("noFile");
 
+const getPassword = ref(false);
+let onSubmit: (submitData: string) => void;
+
+const showNotification = ref(false);
+let notification = ref("");
+
 const displayNameValid = computed(() => {
   updateNameError();
   return nameError.value === "noError";
@@ -49,7 +55,7 @@ function setFile(event: Event) {
 async function store() {
   if (nameError.value !== "noError") return;
 
-  let data;
+  let data: string;
   if (storeVariant.value === "text") {
     if (textError.value !== "noError") return;
     data = text.value;
@@ -59,19 +65,29 @@ async function store() {
     data = await file.value!.text();
   }
 
-  const password = prompt("Please your master password to encrypt the file:");
-  if (!password) return;
+  getPassword.value = true;
 
+  onSubmit = (submitData: string) => {
+    storeEncrypted(data, submitData, name.value);
+  }
+}
+
+async function storeEncrypted(data: string, password: string, name: string) {
+  getPassword.value = false;
   const encrypted = await invoke("encrypt", {
     data,
     password
   });
 
   const store = new Store(".local.dat");
-  await store.set(name.value, encrypted);
-  alert("Data was stored!")
+  await store.set(name, encrypted);
 
-  const dataEncrypted = (await store.get(name.value)) as string;
+  notification.value = "Data was stored";
+  showNotification.value = true;
+
+  console.log(showNotification.value)
+
+  const dataEncrypted = (await store.get(name)) as string;
   console.log(dataEncrypted)
   const decrypted = await invoke("decrypt", {
     data: dataEncrypted,
@@ -84,6 +100,8 @@ import ThemeForm from "../components/ThemeForm.vue";
 import {useUser} from "../stores/userStore.ts";
 import {invoke} from "@tauri-apps/api";
 import {Store} from "tauri-plugin-store-api";
+import PrompModal from "../components/PrompModal.vue";
+import NotifyModal from "../components/NotifyModal.vue";
 </script>
 
 <template>
@@ -147,6 +165,8 @@ import {Store} from "tauri-plugin-store-api";
     </template>
     <template #footer></template>
   </ThemeForm>
+  <PrompModal v-if="getPassword" title="Enter the master password to encrypt" @submit="onSubmit" @cancel="getPassword = false"></PrompModal>
+  <NotifyModal v-if="showNotification" :text="notification" @ok="showNotification = false"></NotifyModal>
 </template>
 
 <style scoped lang="scss">
