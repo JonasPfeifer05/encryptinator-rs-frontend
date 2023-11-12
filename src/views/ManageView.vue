@@ -52,8 +52,7 @@ async function save() {
       return;
     }
 
-    await store.set(newName.value, store.get(selectedName.value))
-    await store.delete(selectedName.value);
+    await store.set(newName.value, await store.get(selectedName.value))
 
     if (newFile.value || newText.value.length > 0) {
       modalStore.configurePrompt("Enter master password to encrypt", true, submitData => {
@@ -62,10 +61,11 @@ async function save() {
       });
       modalStore.showPrompt();
     } else {
+      await store.delete(selectedName.value);
       modalStore.configureNotification("Data was changed");
       modalStore.showNotification();
+      resetValues();
     }
-
   }
 }
 
@@ -86,6 +86,7 @@ async function updateValues(password: string) {
   }
 
   await store.set(newName.value, oldData)
+  await store.delete(selectedName.value);
 
   modalStore.configureNotification("Data was changed");
   modalStore.showNotification();

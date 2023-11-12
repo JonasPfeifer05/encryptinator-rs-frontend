@@ -40,10 +40,16 @@ async function loadDecrypted(name: string, password: string) {
   const store = new Store(".local.dat");
   const data: EntryData = (await store.get(name))!;
 
-  const decryptedValue = await invoke("decrypt", {
+  const decryptedValue: string = await invoke("decrypt", {
     data: data.value,
     password
   });
+
+  if (decryptedValue.length === 0) {
+    modalStore.configureNotification("Wrong password provided");
+    modalStore.showNotification();
+    return;
+  }
 
   if (data.metaData.isFile) {
     modalStore.configureNotification("Data was decrypted");
