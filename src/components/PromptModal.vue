@@ -37,7 +37,7 @@ function cancel() {
 <template>
   <blurry-background @pressed="cancel"/>
   <form id="modal"
-        class="w-75 position-absolute top-50 start-50 translate-middle border border-2 p-3 light-dark-bg light-dark-border rounded-3"
+        class="w-50 position-absolute top-50 start-50 translate-middle border border-2 p-3 light-dark-bg light-dark-border rounded-3"
         @submit.prevent="submit">
     <div id="title" class="d-flex align-items-center h3">{{ props.title }}</div>
     <div id="body"

@@ -20,7 +20,10 @@
         "all": true
       },
       "dialog": {
-        "all": true
+        "save": true
+      },
+      "fs": {
+        "writeFile": true
       }
     },
     "bundle": {

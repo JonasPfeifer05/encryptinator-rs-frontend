@@ -5,7 +5,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div id="blur" class="vw-100 vh-100 position-absolute top-0 start-0" @click="emit('pressed')"/>
+  <div id="blur" class="vw-100 vh-100 position-fixed top-0 bottom-0 start-0 end-0" @click="emit('pressed')"/>
 </template>
 
 <style scoped lang="scss">

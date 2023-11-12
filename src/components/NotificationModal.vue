@@ -17,15 +17,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <blurry-background @pressed="emit('ok')"/>
-  <form id="modal"
-        class="w-75 position-absolute top-50 start-50 translate-middle border border-2 p-3 light-dark-bg light-dark-border rounded-3"
-        @submit.prevent="emit('ok')">
-    <div id="title" class="d-flex align-items-center h3 border-bottom border-1">{{ props.text }}</div>
-    <div id="footer" class="d-flex justify-content-end align-items-center">
+  <div>
+    <blurry-background @pressed="emit('ok')"/>
+    <form id="modal"
+          class="w-50 position-absolute top-50 start-50 translate-middle border border-2 p-3 light-dark-bg light-dark-border rounded-3"
+          @submit.prevent="emit('ok')">
+      <div id="title" class="d-flex align-items-center h3">{{ props.text }}</div>
+      <div id="content" class="border-bottom border-top border-1">
+        <slot/>
+      </div>
+      <div id="footer" class="d-flex justify-content-end align-items-center">
         <button id="submit" type="submit" class="action btn btn-success">Ok</button>
-    </div>
-  </form>
+      </div>
+    </form>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -34,8 +39,8 @@ onMounted(() => {
 }
 
 #modal {
+  height: fit-content;
   box-sizing: content-box !important;
-  height: 150px;
 }
 
 #title {
