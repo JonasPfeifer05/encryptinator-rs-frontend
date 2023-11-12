@@ -32,7 +32,9 @@ function logout() {
         </router-link>
       </div>
     </div>
-    <router-view/>
+    <div id="body">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -43,6 +45,12 @@ function logout() {
 #content {
   top: 100px;
   width: 80%;
+  max-height: 50vh;
+}
+
+#body {
+  max-height: calc(100vh - 100px - 75px - 100px);
+  overflow-y: auto;
 }
 
 #header {

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import BlurryBackground from "./BlurryBackground.vue";
+import BlurryBackground from "../components/BlurryBackground.vue";
 import {computed, onMounted, ref} from "vue";
 
 interface Props {
   title: string,
+  hideInput: boolean,
 }
 
 const props = defineProps<Props>();
@@ -43,7 +44,7 @@ function cancel() {
     <div id="body"
          class="border-bottom border-top border-2 light-dark-border d-flex flex-column justify-content-center">
       <input id="input"
-             type="text"
+             :type="hideInput ? 'password' : 'text'"
              class="form-control"
              v-model="data"
              :class="{'is-valid': displayValidInput, 'is-invalid': !displayValidInput}">

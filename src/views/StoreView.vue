@@ -67,7 +67,7 @@ async function store() {
     data = await file.value!.text();
   }
 
-  modalStore.configurePrompt("Enter master password to encrypt", submitData => {
+  modalStore.configurePrompt("Enter master password to encrypt", true, submitData => {
     modalStore.hidePrompt();
     storeEncrypted(data, submitData, name.value);
   });

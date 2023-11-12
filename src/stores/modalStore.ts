@@ -4,6 +4,7 @@ interface State {
     prompt: {
         show: boolean,
         title: string,
+        hideInput: boolean,
         onSubmit: (submitData: string) => void,
     },
     notification: {
@@ -18,6 +19,7 @@ export const useModal = defineStore('modal', {
     state: (): State => ({
         prompt: {
             show: false,
+            hideInput: false,
             title: "",
             onSubmit: () => {
             },
@@ -28,8 +30,9 @@ export const useModal = defineStore('modal', {
         }
     }),
     actions: {
-        configurePrompt(title: string, onSubmit: (submitData: string) => void) {
+        configurePrompt(title: string, hideInput: boolean, onSubmit: (submitData: string) => void) {
             this.prompt.title = title;
+            this.prompt.hideInput = hideInput;
             this.prompt.onSubmit = onSubmit;
         },
         showPrompt() {
