@@ -21,21 +21,24 @@ function logout() {
 
   <div id="content" class="position-absolute start-50 translate-middle-x">
     <div id="header" class="d-flex light-dark-bg border border-2 border-bottom-0 light-dark-border rounded-top-3">
-      <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-        <router-link to="/home/store" class="text-reset text-decoration-none h2"
-                     :class="{'grayed': route.name !== 'home.store'}">Store
-        </router-link>
-      </div>
-      <div class="flex-grow-1 d-flex justify-content-center align-items-center border-start">
-        <router-link to="/home/retrieve" class="text-reset text-decoration-none h2"
-                     :class="{'grayed': route.name !== 'home.retrieve'}">Load
-        </router-link>
-      </div>
-      <div class="flex-grow-1 d-flex justify-content-center align-items-center border-start">
-        <router-link to="/home/manage" class="text-reset text-decoration-none h2"
-                     :class="{'grayed': route.name !== 'home.manage'}">Manage
-        </router-link>
-      </div>
+      <router-link to="/home/store" class="flex-grow-1 d-flex justify-content-center align-items-center text-reset"
+                   :class="{'grayed': route.name !== 'home.store'}">
+        <div class="text-decoration-none h2">
+          Store
+        </div>
+      </router-link>
+      <router-link to="/home/retrieve" class="flex-grow-1 border-start d-flex justify-content-center align-items-center text-reset"
+                   :class="{'grayed': route.name !== 'home.retrieve'}">
+        <div class="text-decoration-none h2">
+          Load
+        </div>
+      </router-link>
+      <router-link to="/home/manage" class="flex-grow-1 border-start d-flex justify-content-center align-items-center text-reset"
+                   :class="{'grayed': route.name !== 'home.manage'}">
+        <div class="text-decoration-none h2">
+          Manage
+        </div>
+      </router-link>
     </div>
     <div id="body">
       <router-view/>
