@@ -29,7 +29,7 @@ async function loadNames() {
 loadNames();
 
 function load() {
-  modalStore.configurePrompt("Enter master password to decrypt", true, submitData => {
+  modalStore.configurePrompt("Enter the password to decrypt", true, submitData => {
     modalStore.hidePrompt();
     loadDecrypted(name.value, submitData)
   })

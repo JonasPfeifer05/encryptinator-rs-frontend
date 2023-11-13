@@ -55,7 +55,7 @@ async function save() {
     await store.set(newName.value, await store.get(selectedName.value))
 
     if (newFile.value || newText.value.length > 0) {
-      modalStore.configurePrompt("Enter master password to encrypt", true, submitData => {
+      modalStore.configurePrompt("Enter a password to encrypt", true, submitData => {
         modalStore.hidePrompt();
         updateValues(submitData);
       });

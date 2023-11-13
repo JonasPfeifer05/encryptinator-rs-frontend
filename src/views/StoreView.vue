@@ -73,7 +73,7 @@ async function store() {
     return;
   }
 
-  modalStore.configurePrompt("Enter master password to encrypt", true, submitData => {
+  modalStore.configurePrompt("Enter a password to encrypt", true, submitData => {
     modalStore.hidePrompt();
     storeEncrypted(data, submitData, name.value);
   });
