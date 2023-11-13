@@ -34,11 +34,13 @@ const names = ref([] as string[]);
 async function loadNames() {
   const store = new Store(".local.dat");
   names.value = await store.keys();
+  names.value.sort();
 }
 
 loadNames();
 
 async function save() {
+  console.log("a")
   const store = new Store(".local.dat");
   if (actionOption.value === "delete") {
     await store.delete(selectedName.value);
@@ -51,7 +53,6 @@ async function save() {
       modalStore.showNotification();
       return;
     }
-
     await store.set(newName.value, await store.get(selectedName.value))
 
     if (newFile.value || newText.value.length > 0) {
@@ -102,6 +103,23 @@ function resetValues() {
 
 function setFile(event: Event) {
   newFile.value = (event.target as HTMLInputElement).files!.item(0);
+}
+
+function loadPreviousText() {
+  modalStore.configurePrompt("Enter a password to encrypt", true, submitData => {
+    modalStore.hidePrompt();
+    setPreviousData(submitData);
+  });
+  modalStore.showPrompt();
+}
+
+async function setPreviousData(password: string) {
+  const store = new Store(".local.dat");
+  const encryptedData = await store.get(selectedName.value) as EntryData;
+  newText.value = await invoke("decrypt", {
+    password,
+    data: encryptedData.value
+  });
 }
 </script>
 
@@ -155,6 +173,7 @@ function setFile(event: Event) {
                       id="textInput"
                       :disabled="!displaySelectedNameValid || actionOption !== 'change'"
                       placeholder="Enter a new text to store (optional):" rows="2"/>
+            <button type="button" class="btn btn-success mt-3" @click="loadPreviousText">Load previous</button>
           </template>
           <template v-else>
             <label for="fileInput" class="form-label">New file (optional)</label>
@@ -188,6 +207,6 @@ function setFile(event: Event) {
 }
 
 #dataContainer {
-  height: 150px;
+  height: 200px;
 }
 </style>

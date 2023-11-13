@@ -24,6 +24,7 @@ const names = ref([] as string[]);
 async function loadNames() {
   const store = new Store(".local.dat");
   names.value = await store.keys();
+  names.value.sort();
 }
 
 loadNames();
@@ -108,8 +109,5 @@ async function loadDecrypted(name: string, password: string) {
 
 #nameContainer {
   height: 100px;
-}
-#decryptedText {
-  resize: none;
 }
 </style>
