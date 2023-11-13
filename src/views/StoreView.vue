@@ -121,6 +121,7 @@ function resetValues() {
           <div class="w-100">
             <label for="nameInput" class="form-label">Name</label>
             <input v-model="name"
+                   autocomplete="off"
                    id="nameInput"
                    type="text"
                    class="form-control"

@@ -44,6 +44,7 @@ function cancel() {
     <div id="body"
          class="border-bottom border-top border-2 light-dark-border d-flex flex-column justify-content-center">
       <input id="input"
+             autocomplete="off"
              :type="hideInput ? 'password' : 'text'"
              class="form-control"
              v-model="data"

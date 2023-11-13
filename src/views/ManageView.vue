@@ -140,6 +140,7 @@ function setFile(event: Event) {
           <div class="w-100">
             <label for="nameInput" class="form-label">New name (optional)</label>
             <input v-model="newName"
+                   autocomplete="off"
                    id="nameInput"
                    type="text"
                    class="form-control"

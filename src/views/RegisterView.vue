@@ -62,6 +62,7 @@ function updatePasswordError() {
         <div class="w-75 mb-3">
           <label for="emailInput" class="form-label">Email:</label><br>
           <input v-model="email"
+                 autocomplete="off"
                  id="emailInput"
                  type="text"
                  class="form-control"
